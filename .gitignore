@@ -1,0 +1,7 @@
+# Escludi i file eseguibili e gli oggetti
+*.o
+*.out
+# Escludi file specifici se hanno nomi fissi
+studenti
+addetti
+lettore_scrittore
