@@ -39,6 +39,14 @@ Tutti i programmi sono pronti per essere compilati ed eseguiti. Per provarne uno
    ```bash
    make clean  # (se supportato dal Makefile) oppure rimuovi i file .o e gli eseguibili manualmente
    ```
+5. In caso di problemi durante l'exec consiglio vivamente di ripulire la memoria usando:
+   ```bash
+   ipcrm -a
+   ```
+6. Si può controllare lo stato della shm_memory, delle code e dei semafori usando:
+   ```bash
+   ipcs -a
+   ```
 
 ---
 
@@ -64,14 +72,4 @@ Le prove d'esame coprono diverse tipologie di costrutti per la concorrenza e la 
 ### 🚦 Processi e Semafori (System V)
 * *2022-12-16 A*, *2023-09-28*, *2025-05-05*
 
----
-
-## 🖧 Sincronizzazione con Macchina Virtuale (UTM / QEMU)
-
-Per trasferire rapidamente i file aggiornati dalla macchina virtuale di sviluppo (Linux) al tuo Mac Host, puoi utilizzare il comando `scp` da un terminale macOS:
-
-```bash
-scp -r studente@192.168.64.11:"/home/studente/Scrivania/Sistemi Ope" ~/Desktop/
-```
-
-*(Assicurati che la macchina virtuale sia avviata, connessa in rete e con il servizio SSH attivo).*
+## Buona fortuna a tutti!
