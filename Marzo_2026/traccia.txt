@@ -1,0 +1,33 @@
+Si rcalizzi il seguente programma basato su scambio di messaggi, processi e thread.
+
+1l programma simula il software di controllo di un robot, che riceve delle misurazioni da una coppia di sensori 
+(indicati con "x" e "y") ed invia dei comandi ad un attuatore. 
+
+Il programma include 4 processi:
+sensore_x, 
+sensore_y: Inviano periodicamente dei valori (interi scelti casualmente tra 0 e 9) su una coda di messaggi. 
+
+I messaggi dei due sensori devono avere un valore di tipo distinto.
+
+• planner: Riceve i messaggi dai sensori, ed invia un messaggio all'attuatore (la somma dei valori x e y).
+
+• attuatore: Riceve i messaggi dal planner.
+
+Il processo planner dovra includere 2 thread che cooperano secondo lo schema del produttore-consumatore, 
+utilizzando una coppia di buffer singoli. 
+
+I due buffer ("buffer x" o "buffer y") dovranno rispettivamente contenere gli ultimi valori di tipo "x" e 
+di tipo "y" che sono stati ricevuti.
+
+Il thread produttore riceve messaggi dalla coda dei sensori, effettuando due ricezioni selettive di tipo "x" e "y". 
+Ad ogni ricezione, il thread inscrisce il valore ricevuto in uno dei due buffer (in base al tipo, nel buffer 
+x oppure nel buffer y). 
+
+Se il buffer e occupato da un valore procedente non ancora consumato, 
+il thread si pone in attesa che il buffer si liberi.
+
+Il thread consumatore preleva i valori dai buffer. 
+Esso si pone in attesa se uno dei due buffer è ancora libero. 
+Quando i buffer sono entrambi occupati, il thread preleva entrambi valori e libera i buffer, 
+ed invia un messaggio all attuatore.
+Il programma principale crea le code di messaggi e avvia i 4 processi, e ne attende la terminazione.

@@ -1,0 +1,18 @@
+Si realizzi in C/C++ il seguente programma multiprocesso basato su code di messaggi UNIX. Il
+programma adotta lo schema di comunicazione "publisher-subscriber", in cui un publisher può inviare
+lo stesso messaggio (marcato con un indicativo numerico, detto "topic") a tutti i subscriber in attesa di
+messaggi per quel topic. Un processo broker fa da intermediario. Nell'esempio in figura, un publisher
+invia un messaggio con "topic=1" al broker, che lo inoltra a due subscriber che hanno scelto quel topic.
+Inizialmente viene avviato il processo broker, che crea 2 code: una coda per ricevere messaggi dai
+publisher, e una coda di registrazioni. I subscriber utilizzano la coda registrazioni per inviare un
+messaggio che indichi il topic a cui sono interessati, e la coda su cui vogliono ricevere i messaggi. Il
+processo broker esegue 2 thread, che gestiscono ognuno una delle 2 code.
+Successivamente, si avviano i processi subscriber. Ogni subscriber crea una coda di messaggi privata.
+Poi, invia al broker un messaggio contenente lo ID della coda privata, e il topic a cui sono interessati.
+Infine, i subscriber si pongono in ricezione di messaggi dalla coda privata.
+Infine, si avviano i processi publisher, che inviano messaggi contenenti un valore intero casuale e il topic.
+Si creino 3 eseguibili distinti per i publisher, broker, e subscriber. È possibile lanciare l'esecuzione
+utilizzando il comando "make start" nel Makefile incluso nella traccia. L'esecuzione dovrà avviare
+2 processi publisher, che inviano rispettivamente messaggi con "topic=1" e "topic=2". L'esecuzione
+dovrà inoltre avviare 2 processi subscriber in ascolto di messaggi con "topic=1", e 2 processi subscriber
+in ascolto di messaggi con "topic=2".

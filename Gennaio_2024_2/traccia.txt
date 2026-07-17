@@ -1,0 +1,15 @@
+Si realizzi in C/C++ il seguente programma client-server, basato su IPC UNIX
+Il processo client invia al process server frontend un messaggio mediante code di messaggi UNIX 
+e send di tipo sincrono. Il messaggio contiene un valore intero casuale, e l'identificativo di 
+un buffer (un numero casuale tra 0 e 2).
+
+Quando viene avviato, il processo server frontend crea 3 buffer singoli (atti a contenere un valore intero) 
+su memoria condivisa UNIX, e i relativi semafori UNIX per la sincronizzazione. 
+
+Inoltre, il processo server frontend crea 6 processi figli (server worker) a cui passa il riferimento al buffer. 
+Due processi server worker accedono al primo buffer, altri due worker accedono al secondo buffer, e così via.
+
+Il processo frontend funge da scrittore dei buffer, e i processi worker fungono da lettori.
+Quando il processo frontend riceve la richiesta, esso scrive il valore ricevuto nel buffer indicato nel messaggio.
+I buffer sono periodicamente letti dai processi worker ad ogni secondo.
+Il programma principale avvia un processo server e due processi client, lanciando due eseguibili separati.

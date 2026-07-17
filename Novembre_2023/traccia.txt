@@ -1,0 +1,27 @@
+Si realizzi in linguaggio C/C++ una applicazione multithread che realizzi lo schema produttore-
+consumatore con vettore di buffer circolare.
+
+Il programma dovrà creare un oggetto monitor, che implementi i tradizionali metodi di produzione e
+consumazione su vettore circolare.
+
+In aggiunta, il monitor dovrà contenere una variabile "conteggio_consumazioni", ed implementare
+un ulteriore metodo, definito come: int attendi_consumazioni(MonitorProdCons * p, int
+soglia). 
+
+Quando un thread chiama questo metodo, il thread viene sospeso su una variabile condition,
+in attesa che siano effettuate un numero di consumazioni maggiore o uguale al valore "soglia".
+
+La variabile "conteggio_consumazioni" viene incrementata di 1 dai consumatori ad ogni
+consumazione. 
+
+Quando la variabile "conteggio_consumazioni" supera il valore "soglia", il thread
+sospeso viene sbloccato, e la variabile "conteggio_consumazioni" viene azzerata.
+
+Il programma dovrà avviare 3 thread di tipo produttore, 3 thread di tipo consumatore, e 1 thread di tipo
+"conteggio". 
+
+Ogni produttore dovrà effettuare 10 produzioni, e ogni consumatore dovrà effettuare 10
+consumazioni. 
+
+Il thread di conteggio dovrà chiamare più volte il metodo "attendi_consumazioni"
+con soglia pari a 5, fino a quando non siano state effettuate 30 consumazioni in totale.

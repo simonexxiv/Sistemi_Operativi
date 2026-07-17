@@ -1,0 +1,9 @@
+Si realizzi in C/C++ il seguente programma multi-processo che effettua dei calcoli vettoriali.
+I processi P1 e P2 riempiono le due parti del vettore di input, inserendo con valori interi casuali.
+Il processo P3 effettua il prodotto scalare tra il vettore di input e le righe della prima matrice di parametri.
+I risultati sono depositati in un vettore di risultati intermedio.
+Il processo P4 effettua il prodotto scalare tra il vettore intermedio e le righe della seconda matrice di
+parametri. I risultati sono stampati a video.
+I vettori di input e di risultati intermedio devono essere condivisi tramite memoria condivisa UNIX, e
+acceduti secondo lo schema del produttore-consumatore. Utilizzare il costrutto monitor di Hoare.
+Il programma principale avvia tutti gli altri processi, e gli condivide le matrici di parametri.

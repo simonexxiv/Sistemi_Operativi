@@ -1,0 +1,33 @@
+Si realizzi in linguaggio C/C++ una applicazione multithread che simuli la gestione di un portafoglio
+azionario. L'applicazione dovrà implementare un monitor di tipo "portafoglio", che contenga al suo
+interno le seguenti variabili:
+• Valore attuale del titolo azionario (valore intero)
+• Quantità di azioni detenute nel portafoglio (valore intero)
+Il monitor dovrà fornire i seguenti metodi:
+
+• acquisto(quantità, prezzo): Il metodo incrementa la quantità di azioni nel
+portafoglio, a condizione che il prezzo offerto sia maggiore o uguale al valore attuale del titolo.
+Altrimenti, il metodo mette in sospensione il chiamante fin quando la condizione non sia
+verificata.
+
+• vendita(quantità, prezzo): Il metodo decrementa la quantità di azioni nel
+portafoglio, se sono verificate le seguenti condizioni: 
+(1) il prezzo offerto è minore o uguale al valore attuale del titolo; 
+(2) la quantità di azioni detenute è maggiore o uguale alla quantità che si vuole vendere. 
+Altrimenti, il metodo mette in sospensione il chiamante fin quando le condizioni non sono verificate.
+
+• aggiorna(valore): Modifica il valore del titolo, e riattiva tutti i thread sospesi.
+• leggi(): Ritorna il valore attuale del titolo azionario.
+
+Il programma principale dovrà istanziare 3 oggetti di tipo "portafoglio", tutti con valore iniziale pari a
+100 e quantità pari a 500. I
+
+l programma principale avvierà poi i seguenti thread:
+• aggiornatore (1 thread): chiama ripetutamente (per 10 volte, con pausa di 1 secondo) il
+metodo "aggiorna" su tutti gli oggetti monitor, assegnando un valore pari a 100 + un valore
+casuale tra -10 e 10.
+• azionista (3 thread, uno per ogni oggetto monitor): chiama inizialmente il metodo "vendita",
+richiedendo 50 titoli a prezzo 105; poi, chiama il metodo "acquisto", richiedendo 50 titoli a
+prezzo 95.
+Al termine degli aggiornamenti, il thread aggiornatore "forza" la terminazione di eventuali thread
+azionisti ancora sospesi, prima assegnando artificialmente il valore dei titoli a 200, e poi a 0.

@@ -1,0 +1,33 @@
+Si realizzi il seguente programma concorrente, utilizzando i processi, thread, e code di messaggi.
+
+Un processo “database” gestisce al suo interno un vettore di variabili di tipo intero 
+(inizialmente pari a zero). 
+
+Il processo “database” avvia un gruppo di 3 thread, che condividono il vettore di variabili. 
+
+Ogni thread si pone in attesa di richieste da una coda di messaggi. 
+
+Una richiesta può essere di tipo LETTURA o SCRITTURA. 
+Il messaggio di richiesta dovrà contenere un valore intero che indichi la posizione del vettore in cui leggere o scrivere. 
+
+Nel caso di richieste di SCRITTURA, il messaggio di richiesta dovrà contenere il valore da scrivere. 
+
+Nel caso di richieste di LETTURA, il campo con il valore da scrivere sarà ignorato dal thread ricevente. 
+
+Dopo aver eseguito la operazione richiesta, il thread invierà un messaggio di risposta, 
+contenente il valore letto (per le operazioni di LETTURA) oppure 0 (per le operazioni di SCRITTURA).
+
+È richiesto che i thread accedano in mutua esclusione al vettore di variabili.
+
+Un gruppo di processi “client” inviano i messaggi di richiesta, scegliendo casualmente il tipo di
+operazione e i valori da inviare. 
+
+I messaggi di richiesta sono inizialmente inviati a un gruppo di processi “server”, 
+tramite una ulteriore coda di messaggi. 
+
+I processi “server” inoltrano le richieste verso la coda di messaggi usata dal processo “database”, 
+dopo un ritardo di 1 secondo per simulare una elaborazione.
+
+I processi “database” e “server” inviano i messaggi di risposta indicando il PID del processo destinatario
+come tipo di messaggio. I processi “client” e “server” dovranno effettuare una ricezione selettiva in base
+al proprio PID.

@@ -1,0 +1,12 @@
+.DS_Store
+*.o
+*.out
+*.log
+*.zip
+*.tar.gz
+*.tgz
+*.swp
+*~
+.idea/
+.vscode/
+.git/
