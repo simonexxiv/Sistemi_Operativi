@@ -1,0 +1,32 @@
+Si realizzi in C il seguente programma che simula uno schema di Internet of Things.
+
+Il programma prevede dei processi Sensore, a cui viene assegnato ad ognuno un numero identificativo
+(1, 2, 3). 
+
+Ogni Sensore genera dei valori interi casuali e li invia ad un processo Collettore mediante una
+unica coda di messaggi UNIX.
+
+Il Collettore effettua 3 ricezioni alla volta, effettuando una ricezione selettiva per ogni valore basata
+sull’identificativo di ogni Sensore (1, 2, 3). 
+
+Dopo aver ricevuto 3 valori, il Collettore ne calcola la media, e la invia a un eseguibile separato, 
+denominato Server, mediante un’altra coda di messaggi.
+
+Il Server è a sua volta costituito da due tipologie di processi: 
+un processo che riceve le medie dal Collettore e processi visualizzatori. 
+
+Il processo ricevente, ad ogni ricezione, inserisce la media ricevuta in un buffer su memoria condivisa. 
+
+I visualizzatori consumano un valore alla volta dal buffer, e lo stampano a video. 
+
+Il buffer deve essere gestito come coda circolare, con schema produttore-consumatore attraverso l’utilizzo di semafori.
+
+Si completi anche il programma principale, che dovrà creare i vari processi, incluso il server da lanciare
+come eseguibile a parte. 
+
+Oltre al server, il programma principale crea 1 processo Collettore, e 3 processi Sensore. 
+
+I processi Sensore invieranno 6 messaggi ognuno. 
+Il server crea 1 processo ricevente e 2 visualizzatori. 
+
+Il buffer circolare è costituito da 2 elementi di tipo intero.

@@ -1,0 +1,13 @@
+Si realizzi il seguente programma concorrente, utilizzando i processi, thread, e code di messaggi.
+Il processo Client invia dei messaggi di richiesta, che contengono un valore casuale intero. 
+
+I messaggi dovranno essere inviati tramite send sincrona, utilizzando due code aggiuntive per la sincronizzazione
+(request/ok to send).
+
+Il processo Server dovrà avviare tre thread, che coopereranno in pipeline. 
+Il primo thread riceve i messaggi provenienti dal Client, 
+e deposita il valore all’interno di un buffer singolo condiviso (b1). 
+
+Il secondo thread consuma il valore dal buffer b1, lo moltiplica per 2, e inserisce il risultato in un altro
+buffer singolo condiviso (b2). Il terzo thread consuma il valore dal buffer b2, lo incrementa di 1, 
+e stampa a video il risultato.

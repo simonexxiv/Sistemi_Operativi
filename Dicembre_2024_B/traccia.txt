@@ -1,0 +1,19 @@
+Si realizzi in linguaggio C un’applicazione multithread, che simuli l’attività degli elfi di Babbo
+Natale durante la preparazione e la consegna dei regali. Il sistema prevede tre categorie di thread:
+gli elfi fabbricatori, che rappresentano i produttori, gli elfi assemblatori, che rappresentano i
+consumatori, e un ulteriore thread Babbo Natale.
+Gli elfi fabbricatori producono i giocattoli, rappresentati da un intero casuale da 1 a 100, e li
+inseriscono in un pool di buffer gestito come coda circolare di dimensione 6. I produttori si
+sospendono nel caso in cui il vettore sia pieno e terminano dopo aver prodotto ognuno 15 giocattoli.
+Gli elfi assemblatori si occupano di prelevare i giocattoli dal vettore, impacchettarli, e avvisare il
+thread Babbo Natale che i regali sono pronti per essere consegnati. Precisamente, un elfo
+assemblatore attende che siano disponibili 3 giocattoli nel vettore, altrimenti si sospende, e poi
+incrementa il conteggio dei regali completati, il quale è memorizzato in un buffer intero condiviso
+separato dalla coda circolare. Infine, se sono stati prodotti un totale di 5 regali, notifica Babbo
+Natale di poter far partire la consegna.
+Il thread Babbo Natale entra in azione quando il valore del buffer di conteggio raggiunge 5. A
+questo punto, decrementa il buffer di 5 regali, stampa un messaggio di conferma e parte con la
+consegna dei regali. Babbo Natale continua a monitorare la produzione fino a che non vengono fatte
+un totale di 6 consegne.
+Il programma principale dovrà creare 6 thread produttori, 3 thread consumatori e 1 thread Babbo
+Natale.

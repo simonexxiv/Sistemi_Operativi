@@ -1,0 +1,42 @@
+Si realizzi il seguente programma multi-processo basato su costrutto monitor signal-and-continue.
+
+Il programma dovrà realizzare lo schema produttore-consumatore con vettore di stato.
+
+In aggiunta ai classici vincoli del produttore-consumatore, il programma dovrà fare in modo che i
+produttori effettuino le produzioni in base al loro ordine di arrivo (first-in, first-out). 
+
+Nel caso che il vettore di buffer non abbia elementi liberi, i produttori devono essere messi in attesa. 
+
+Quando si libererà un buffer, dovrà essere il produttore in attesa da più tempo ad effettuare la produzione.
+
+Per realizzare questo vincolo, si introducano nel monitor due variabili condivise e intere “ultimo
+produttore arrivato” e “ultimo produttore avviato”. 
+Entrambe le variabili sono inizialmente pari a 0.
+
+Appena un produttore invoca il metodo del monitor, esso copia il valore della variabile (condivisa)
+“ultimo produttore arrivato” in una sua variabile locale (non condivisa), 
+e incrementa la variabile “ultimo produttore arrivato”.
+
+Prima di iniziare la produzione, il produttore dovrà verificare sia che vi sia almeno un buffer libero, 
+sia che la sua copia locale (non condivisa) di “ultimo produttore arrivato” coincida con la variabile
+(condivisa) “ultimo produttore avviato”. 
+
+Nel caso che una di queste due condizioni non sia verificata, il produttore dovrà essere messo in attesa.
+
+Infine, prima di iniziare la produzione, il produttore dovrà incrementare il valore della variabile
+(condivisa) “ultimo produttore avviato”.
+
+Il consumatore dovrà limitarsi a verificare la condizione che vi sia almeno un buffer occupato. 
+Non è richiesto che i consumatori accedano in ordine di arrivo. 
+
+Si fa presente che la soluzione richiede che, al termine di una consumazione, 
+il consumatore risvegli tutti i produttori in attesa. 
+
+Il solo produttore che soddisfa entrambe le due condizioni sopra menzionate effettuerà la produzione, 
+mentre gli altri produttori si porranno di nuovo in attesa. 
+
+Il numero di produttori in attesa è determinato dalla differenza tra le variabili (condivise) 
+“ultimo produttore arrivato” e “ultimo produttore avviato”.
+
+Il programma principale dovrà creare 5 processi produttori (4 produzioni ognuno) e 2 processi
+consumatori (10 consumazioni ognuno), e attenderne la terminazione.

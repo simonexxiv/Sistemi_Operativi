@@ -1,6 +1,17 @@
 # Escludi i file eseguibili e gli oggetti
 *.o
 *.out
+*.log
+*.zip
+*.tar.gz
+*.tgz
+*.swp
+*~
+.DS_Store
+.idea/
+.vscode/
+.git/
+
 # Escludi file specifici se hanno nomi fissi
 studenti
 addetti

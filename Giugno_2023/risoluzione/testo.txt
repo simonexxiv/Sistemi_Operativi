@@ -1,0 +1,16 @@
+Si realizzi in linguaggio C/C++ una applicazione multiprocesso che realizzi il seguente schema
+produttore-consumatore.
+I processi dovranno interagire tramite le seguenti 2 risorse:
+• Un oggetto monitor per produzione-consumazione su buffer singolo (valore di tipo intero), da
+collocare su una memoria condivisa UNIX;
+• Una coda di messaggi UNIX, su cui inviare/ricevere valori (di tipo intero).
+Il processo padre dovrà creare 1 processo Produttore e 1 processo Consumatore, passandogli dei
+riferimenti alle 2 risorse.
+Il processo Produttore sceglie a caso (tra 0 e 9) il numero totale di valori da produrre, e lo inserisce
+nel buffer singolo tramite operazione di produzione. Successivamente, il processo Produttore genera
+ed invia dei valori casuali (tra 0 e 9) tramite la coda di messaggi, per il numero di volte indicato nel
+buffer singolo.
+Il processo Consumatore si pone in attesa di ricevere dal Produttore il numero totale di valori che
+saranno prodotti, effettuando una operazione di consumazione dal buffer singolo. Successivamente, il
+processo Consumatore riceve i valori dalla coda di messaggi, per il numero di volte indicato nel
+buffer singolo.

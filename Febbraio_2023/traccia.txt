@@ -1,0 +1,19 @@
+Si realizzi in C/C++ il seguente programma che simula uno schema di edge computing.
+Il programma prevede dei processi Sensore, a cui viene assegnato ad ognuno un numero identificativo
+(1, 2, 3). Ogni Sensore genera dei valori interi casuali e li invia ad un processo Collettore mediante una
+unica coda di messaggi UNIX. Anche i processi Collettore hanno assegnato un numero identificativo
+(1, 2).
+Il Collettore effettua 3 ricezioni alla volta, effettuando una ricezione selettiva per ogni valore basata
+sullo identificativo di ogni Sensore (1, 2, 3). Dopo aver ricevuto 3 valori, il Collettore ne calcola la
+media, e lo invia a un processo Server.
+Analogamente, il Server effettua 2 ricezioni alla volta, effettuando una ricezione selettiva per ogni valore
+basato sullo identificativo di ogni Collettore (1, 2). Dopo aver ricevuto 2 valori, il Server ne calcola la
+media, e lo deposita in un buffer singolo, da gestire con schema produttore-consumatore mediante
+costrutto monitor.
+Prima di ricevere i messaggi, il Server avvia un thread Visualizzatore. Il thread consuma un valore alla
+volta dal buffer singolo, e lo stampa a video.
+Si completi anche il programma principale, che dovrà creare i vari processi e passargli i parametri (i
+numeri identificativi, gli identificativi delle code di messaggi). 
+
+Andranno creati 2 processi Collettore, e
+3 processi Sensore per ogni Collettore. I processi Sensore invieranno 5 messaggi ognuno.

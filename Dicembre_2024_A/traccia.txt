@@ -1,0 +1,23 @@
+Si realizzi in linguaggio C un’applicazione multiprocesso basata sul costrutto Monitor di Hoare, che simuli
+l’attività degli elfi di Babbo Natale durante la preparazione e la consegna dei regali. Il sistema prevede tre
+categorie di processi: gli elfi fabbricatori, che rappresentano i produttori, gli elfi assemblatori, che
+rappresentano i consumatori, e un ulteriore processo Babbo Natale.
+L’elfo fabbricatore si occupa di produrre due diversi tipi di giocattoli: Giocattolo Tipo 1 e Giocattolo Tipo 2,
+rappresentati dal numero intero 1 o 2, rispettivamente. Ogni giocattolo prodotto viene inserito in un pool di
+buffer di dimensione 6 gestito con vettore di stato. Il vettore di stato tiene traccia dello stato di ciascun
+elemento, che può essere LIBERO, IN_USO, OCCUPATO_GIOCO1 o OCCUPATO_GIOCO2. Il produttore
+lavora ciclicamente, producendo un nuovo giocattolo ogni 2 secondi, e si sospende nel caso in cui il vettore sia
+pieno. La produzione termina quando sono stati prodotti un totale di 20 giocattoli, suddivisi equamente tra i due
+tipi, 10 di un tipo e 10 di un altro.
+Gli elfi assemblatori, rappresentati da due processi distinti, prelevano i giocattoli dal vettore. Il primo
+consumatore preleva esclusivamente Giocattoli Tipo 1, mentre il secondo preleva Giocattoli Tipo 2. I
+consumatori si sospendono qualora non ci siano giocattoli disponibili del tipo richiesto. Ogni processo
+consumatore preleva 10 giocattoli dal vettore.
+Ogni giocattolo prelevato viene registrato aggiornando un buffer intero condiviso per il conteggio totale dei
+regali assemblati, separato dal vettore di stato e gestito tramite semafori. Il buffer inizialmente contiene il valore
+zero e viene incrementato di uno per ciascun giocattolo prelevato, indipendentemente dal tipo. Ogni volta che un
+consumatore preleva un giocattolo dal vettore e lo registra nel buffer avvisa il processo Babbo Natale, il quale
+preleva il valore dal buffer e stampa il conteggio totale di giocattoli assemblati. Babbo Natale continua a
+monitorare la produzione fino a che non vengono consegnati un totale di 20 regali.
+Il programma principale avvia un processo produttore, due consumatori (uno per ogni tipo di giocattolo) e un
+processo Babbo Natale.

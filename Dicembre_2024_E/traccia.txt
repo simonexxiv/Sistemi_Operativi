@@ -1,0 +1,16 @@
+Si realizzi in linguaggio C un’applicazione multiprocesso basata sul costrutto Monitor signal and
+continue, che simuli l’invio delle letterine a Babbo Natale da parte dei bambini e la conseguente
+consegna dei regali. L’applicazione prevede 2 categorie di processi: i bambini, che agiscono come
+produttori, e Babbo Natale, che agisce come consumatore.
+I bambini producono una letterina per Babbo Natale, la quale contiene un id intero (casuale da 1 a
+10) per farsi identificare e un numero_regali intero (casuale da 1 a 5) rappresentante il numero di
+regali richiesti, e la inseriscono in un vettore di dimensione 5 gestito come coda circolare.
+Babbo Natale preleva le letterine dalla coda e, prima di rispondere, controlla nella sua lista se il
+bambino è stato buono o cattivo. Il processo mantiene un vettore di interi contenente gli
+identificativi dei bambini cattivi. Per ogni richiesta, Babbo Natale estrae la letterina e verifica se l’id
+contenuto in essa è contenuto nella lista dei cattivi: in tal caso, risponde al bambino che è stato
+cattivo, altrimenti invia un messaggio di conferma di ricezione.
+L’invio della risposta di Babbo Natale avviene tramite una coda di messaggi UNIX con una
+comunicazione basata su send sincrona. Il messaggio di risposta contiene una stringa “buono” o
+“cattivo” e, una volta ricevuto dal processo produttore, viene stampato a video.
+Il programma principale avvia 10 processi produttori e 1 processo consumatore.

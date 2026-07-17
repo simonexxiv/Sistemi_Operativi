@@ -1,0 +1,19 @@
+Si realizzi in linguaggio C un’applicazione multiprocesso basata sul costrutto Monitor, che simuli
+l’invio delle letterine a Babbo Natale da parte dei bambini e la conseguente consegna dei regali.
+L’applicazione realizza uno schema client-server. Client e server comunicano attraverso due code
+di messaggi UNIX, una coda per le richieste e una coda per le risposte.
+Il processo client genera 3 processi bambini, i quali inviano 5 lettere ognuno a Babbo Natale
+tramite la coda delle richieste, rappresentate da un messaggio contenente il numero di regali
+desiderati, un intero casuale tra 1 e 5.
+Il processo server, che rappresenta la fabbrica di regali di Babbo Natale, detiene una variabile
+intera condivisa totale_regali, e genera tanti processi scrittore e tanti processi lettori quante sono
+le richieste ricevute dai bambini lato client attraverso la ‘coda_richieste’. Tra la creazione di un
+processo figlio e l’altro, sia di tipo scrittore che lettore, si usi una sleep con un tempo scelto
+casualmente tra 1 e 3. Tutti i processi lavorano sulla struttura condivisa accedendovi come lettori-
+scrittori con starvation di entrambi.
+Il processo scrittore preleva le lettere dalla coda richieste e, per ogni richiesta, somma al valore di
+totale_regali il numero di regali richiesti in quella lettera.
+Ogni processo lettore effettua un singola lettura in cui legge il valore del totale_regali, lo stampa a
+video, e invia un messaggio di “avvenuta ricezione” ai bambini sulle coda delle risposte,
+rappresentato da un messaggio vuoto.
+I processi client e server risiedono in eseguibili distinti e vengono generati da un processo main.

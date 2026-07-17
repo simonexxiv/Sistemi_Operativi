@@ -1,0 +1,26 @@
+Si realizzi in C/C++ il seguente programma client-server, basato su IPC UNIX.
+I processi client e il server condividono una coppia di code di richieste e di risposte. 
+
+Inizialmente, il client invia una richiesta di richiesta con il suo PID, e il numero di valori 
+che vuole ricevere dal server nelle fasi successive (es. 10 valori).
+
+Ad ogni richiesta di connessione, il server crea due vettori circolari di buffer in memoria condivisa,
+per lo scambio di valori secondo lo schema produttore-consumatore,
+e i semafori necessari per la sincronizzazione. 
+
+Il server invia al client un messaggio di risposta con gli identificativi delle risorse.
+
+Ogni coppia di client e server figlio deve operare su una coppia di vettori circolari distinti.
+
+Dopo aver inviato il messaggio di risposta, il server crea un nuovo processo figlio, a cui passa le risorse
+e il numero indicato dal client. 
+
+Il processo server figlio effettua un ciclo in cui consuma un valore dal primo vettore circolare (invio), 
+ne effettua la moltiplicazione per 2, e inserisce il risultato nel secondo vettore circolare (ricezione). 
+
+Si ripete per il numero di volte indicato dal client. Infine, il processo server figlio dealloca le risorse.
+
+Analogamente, dopo aver ricevuto il messaggio di risposta, il client effettua un ciclo in cui inserisce un
+valore nel primo vettore circolare, e preleva un risultato dal secondo vettore circolare.
+
+Il programma principale avvia un processo server e due processi client, lanciando due eseguibili separati.
